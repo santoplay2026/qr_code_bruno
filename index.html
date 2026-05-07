@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEC Engenharia - Cartão Virtual Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -19,292 +18,531 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #000;
-            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f0f2e 100%);
+            overflow: auto;
             position: relative;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
         }
 
-        /* Fundo Líquido Otimizado (GPU Accelerated) */
-        .liquid-bg {
-            position: absolute;
+        /* Fundo com Efeito Gradiente Animado */
+        .animated-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: linear-gradient(180deg, #001a33 0%, #000 100%);
-            /* Reduzido o blur para melhorar performance */
-            filter: blur(60px);
-            will-change: transform;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(88, 86, 214, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 199, 255, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+            pointer-events: none;
         }
 
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.5;
-            will-change: transform;
-            animation: move 25s infinite alternate ease-in-out;
-        }
-
-        .blob-1 {
-            width: 450px;
-            height: 450px;
-            background: #007aff;
-            top: -5%;
-            left: -5%;
-        }
-
-        .blob-2 {
-            width: 350px;
-            height: 350px;
-            background: #5856d6;
-            bottom: 5%;
-            right: -5%;
-            animation-delay: -5s;
-        }
-
-        .blob-3 {
-            width: 300px;
-            height: 300px;
-            background: #00c7ff;
-            top: 35%;
-            left: 45%;
-            animation-delay: -10s;
-        }
-
-        @keyframes move {
-            0% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(60px, 40px, 0) scale(1.1); }
-            100% { transform: translate3d(-30px, 80px, 0) scale(0.9); }
+        @keyframes gradientShift {
+            0%, 100% {
+                background: 
+                    radial-gradient(circle at 20% 50%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(88, 86, 214, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 20%, rgba(0, 199, 255, 0.1) 0%, transparent 50%);
+            }
+            50% {
+                background: 
+                    radial-gradient(circle at 80% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 20% 80%, rgba(88, 86, 214, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 60%, rgba(0, 199, 255, 0.1) 0%, transparent 50%);
+            }
         }
 
         .container {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 400px;
-            padding: 20px;
+            max-width: 500px;
         }
 
-        /* Cartão Vidro Otimizado */
+        /* CARTÃO PRINCIPAL - ULTRA PREMIUM */
         .card {
-            background: rgba(255, 255, 255, 0.06);
-            /* Backdrop filter pode ser pesado, ajustado para equilíbrio */
-            backdrop-filter: blur(25px) saturate(150%);
-            -webkit-backdrop-filter: blur(25px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 45px;
-            padding: 50px 35px;
+            background: rgba(20, 24, 55, 0.7);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: 60px 45px;
             color: white;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 122, 255, 0.1),
+                0 0 60px rgba(88, 86, 214, 0.08),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Efeito de Brilho Sutil */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 199, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* BADGE TOPO */
         .top-badge {
             position: absolute;
-            top: 35px;
-            right: 35px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 14px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 500;
+            top: 25px;
+            right: 30px;
+            background: rgba(0, 199, 255, 0.1);
+            border: 1px solid rgba(0, 199, 255, 0.3);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s ease-in-out infinite;
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* LOGO */
         .logo-container {
-            margin-bottom: 45px;
+            margin-bottom: 35px;
         }
 
         .logo-circle {
-            width: 65px;
-            height: 65px;
-            background: white;
-            border-radius: 20px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.3) 0%, rgba(88, 86, 214, 0.3) 100%);
+            border: 2px solid rgba(0, 199, 255, 0.4);
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 30px rgba(0, 122, 255, 0.2);
+            animation: float 3s ease-in-out infinite;
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* HEADER */
         .header-info {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .company-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff88;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* TÍTULO PRINCIPAL */
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 800;
             margin-bottom: 12px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* SUBTÍTULO */
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.75;
+            margin-bottom: 28px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* TAGS DE ESPECIALIDADE */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(0, 199, 255, 0.3);
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(0, 199, 255, 0.15);
+            border-color: rgba(0, 199, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* SEÇÃO DE SERVIÇOS */
+        .services-section {
+            background: rgba(0, 199, 255, 0.05);
+            border: 1px solid rgba(0, 199, 255, 0.2);
+            border-radius: 25px;
+            padding: 22px;
+            margin-bottom: 28px;
+            backdrop-filter: blur(10px);
+        }
+
+        .services-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .company-name {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #34c759;
+        .services-title::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #00ff88;
             border-radius: 50%;
         }
 
-        .main-title {
-            font-size: 38px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            letter-spacing: -1px;
-            line-height: 1.1;
+        .services-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
-        .tags-container {
+        .service-item {
+            font-size: 12px;
+            opacity: 0.8;
             display: flex;
-            gap: 10px;
-            margin-bottom: 45px;
+            align-items: center;
+            gap: 8px;
         }
 
-        .tag {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .service-item::before {
+            content: '✦';
+            color: #00d4ff;
+            font-weight: 700;
         }
 
+        /* BOTÕES DE AÇÃO */
         .action-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 40px;
+            gap: 14px;
+            margin-bottom: 35px;
         }
 
-        /* Botões Otimizados (Sem transições pesadas) */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 16px;
+            gap: 12px;
+            padding: 18px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 15px;
             text-decoration: none;
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            /* Transição simplificada para evitar lag */
-            transition: background 0.2s ease, transform 0.1s ease;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn:active {
-            transform: scale(0.97);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+            z-index: 0;
         }
 
-        .btn-primary {
-            background: rgba(255, 255, 255, 0.12);
+        .btn:hover::before {
+            left: 100%;
         }
 
-        .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .btn span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn-insta {
-            background: rgba(255, 255, 255, 0.05);
+        /* BOTÃO WHATSAPP */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-insta:hover {
-            background: rgba(188, 24, 136, 0.3);
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
         }
 
+        /* BOTÃO INSTAGRAM */
+        .btn-instagram {
+            background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcaf45 100%);
+            box-shadow: 0 8px 25px rgba(253, 29, 29, 0.3);
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(253, 29, 29, 0.4);
+        }
+
+        /* DIVISOR */
         .divider {
             width: 100%;
             height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin-bottom: 35px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 199, 255, 0.3) 50%, transparent 100%);
+            margin-bottom: 32px;
         }
 
-        .footer-info {
+        /* RODAPÉ COM BOTÃO SITE DESTACADO */
+        .footer-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
+        }
+
+        .info-box {
+            flex: 1;
         }
 
         .info-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
         }
 
         .info-sub {
-            font-size: 14px;
-            opacity: 0.5;
+            font-size: 13px;
+            opacity: 0.55;
+            font-weight: 400;
         }
 
-        .visit-site {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+        /* BOTÃO SITE - DESTAQUE ESPECIAL */
+        .btn-site {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #0a0e27;
+            padding: 16px 28px;
+            border-radius: 22px;
+            font-weight: 700;
+            font-size: 14px;
             text-decoration: none;
-            padding: 14px 24px;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
+        .btn-site::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .btn-site:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-site span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* RESPONSIVO */
         @media (max-width: 480px) {
             .card {
-                padding: 40px 25px;
+                padding: 45px 28px;
+                border-radius: 40px;
             }
+
             .main-title {
-                font-size: 32px;
+                font-size: 38px;
+            }
+
+            .services-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn-site {
+                width: 100%;
+            }
+
+            .top-badge {
+                top: 20px;
+                right: 20px;
+                font-size: 11px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="liquid-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+    <div class="animated-bg"></div>
 
     <div class="container">
         <div class="card">
             <div class="top-badge">
-                Saved <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+                ✨ Ativo <span style="width: 6px; height: 6px; background: #00ff88; border-radius: 50%; display: inline-block;"></span>
             </div>
 
-            <div class="logo-container">
-                <div class="logo-circle">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 5C11.7157 5 5 11.7157 5 20C5 28.2843 11.7157 35 20 35C28.2843 35 35 28.2843 35 20C35 11.7157 28.2843 5 20 5Z" stroke="#0074D9" stroke-width="3"/>
-                        <path d="M10 20H15L18 15L22 25L25 20H30" stroke="#0074D9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+            <div class="card-content">
+                <div class="logo-container">
+                    <div class="logo-circle">
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="25" r="20" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <path d="M15 25H20L23 18L28 32L32 25H37" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#0099cc;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
                 </div>
-            </div>
 
-            <div class="header-info">
-                <span class="company-name">SEC Engenharia</span>
-                <div class="status-dot"></div>
-            </div>
-
-            <h1 class="main-title">Desenvolver<br>para Evoluir</h1>
-
-            <div class="tags-container">
-                <div class="tag">Elétrica</div>
-                <div class="tag">Segurança</div>
-            </div>
-
-            <div class="action-buttons">
-                <a href="https://wa.me/5573991396879" class="btn btn-primary">Solicitar Orçamento</a>
-                <a href="https://www.instagram.com/sec.eng/" class="btn btn-insta">Siga no Instagram</a>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="footer-info">
-                <div class="info-box">
-                    <div class="info-title">SEC Engenharia</div>
-                    <div class="info-sub">Eunápolis, Bahia</div>
+                <div class="header-info">
+                    <span class="company-name">SEC Engenharia</span>
+                    <div class="status-dot"></div>
                 </div>
-                <a href="https://sec.eng.br/" class="visit-site">Site</a>
+
+                <h1 class="main-title">Desenvolver<br>para Evoluir</h1>
+
+                <p class="subtitle">Conformidade • Segurança • Qualidade Técnica | Eunápolis, BA</p>
+
+                <div class="tags-container">
+                    <div class="tag">⚡ Elétrica</div>
+                    <div class="tag">🛡️ Segurança</div>
+                    <div class="tag">🔥 Incêndio</div>
+                    <div class="tag">⚙️ Mecânica</div>
+                    <div class="tag">🏥 Clínica</div>
+                </div>
+
+                <div class="services-section">
+                    <div class="services-title">Principais Serviços</div>
+                    <div class="services-list">
+                        <div class="service-item">Laudos Técnicos</div>
+                        <div class="service-item">SPDA/Conformidade</div>
+                        <div class="service-item">Segurança Trabalho</div>
+                        <div class="service-item">PPCI/Incêndio</div>
+                        <div class="service-item">Eng. Mecânica</div>
+                        <div class="service-item">Eng. Clínica</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="https://wa.me/5573991396879" 
+                       class="btn btn-whatsapp" 
+                       title="Solicite um orçamento via WhatsApp"
+                       aria-label="Solicitar orçamento">
+                        <span>💬 Solicitar Orçamento</span>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/sec.eng/" 
+                       class="btn btn-instagram" 
+                       title="Siga no Instagram"
+                       aria-label="Seguir no Instagram">
+                        <span>📸 Siga no Instagram</span>
+                    </a>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="footer-section">
+                    <div class="info-box">
+                        <div class="info-title">SEC Engenharia</div>
+                        <div class="info-sub">Eunápolis, Bahia</div>
+                    </div>
+                    <a href="https://sec.eng.br/" 
+                       class="btn-site" 
+                       title="Acesse o site oficial da SEC Engenharia"
+                       aria-label="Visitar site oficial">
+                        <span>🌐 Site</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
